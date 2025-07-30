@@ -7,3 +7,4 @@ function require_login() {
         exit();
     }
 }
+?>

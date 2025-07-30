@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login - Mr_Budget</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-    <h2>Login</h2>
+<?php
+session_start();
+require_once '../config/database.php';
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <p class="error"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
-    <?php endif; ?>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    
+    if (empty($email) || empty($password)) {
+        $_SESSION['error'] = "Email and password are required.";
+        header("Location: ../index.php");
+        exit();
+    }
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
 
-    <form action="login.php" method="POST">
-        <input name="username" placeholder="Username" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
 
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
-</body>
-</html>
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                header("Location: ../dashboard/index.php");
+                exit();
+            } else {
+                $_SESSION['error'] = "Invalid password.";
+                header("Location: ../index.php");
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = "User not found.";
+            header("Location: ../index.php");
+            exit();
+        }
+    }
+}
+?>

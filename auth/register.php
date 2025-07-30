@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         $_SESSION['user_id'] = $stmt->insert_id;
-        header("Location: ../dashboard/index.php");
+        header("Location: ../index.php");
         exit();
     } else {
         $_SESSION['error'] = "Username or email already exists.";
