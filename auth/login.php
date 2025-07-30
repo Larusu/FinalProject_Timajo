@@ -2,11 +2,13 @@
 session_start();
 require_once '../config/database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     
-    if (empty($email) || empty($password)) {
+    if (empty($email) || empty($password)) 
+    {
         $_SESSION['error'] = "Email and password are required.";
         header("Location: ../index.php");
         exit();
@@ -14,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
 
+    if($stmt === false) 
+    {
+        $_SESSION['error'] = "Database error: " . $conn->error;
+        header("Location: ../index.php");
+        exit();
+    }
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         if ($result->num_rows === 1) {
