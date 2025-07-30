@@ -13,6 +13,6 @@
         <button type="submit">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
+    <p>Don't have an account? <a href="auth/register.php">Register here</a></p>
 </body>
 </html>
