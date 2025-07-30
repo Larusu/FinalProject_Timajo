@@ -46,7 +46,7 @@ $expensesCreate = "CREATE TABLE IF NOT EXISTS expenses (
     date DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );";
-$savingsGoalsCreate = "CREATE TABLE Savings_Goals (
+$savingsGoalsCreate = "CREATE TABLE IF NOT EXISTS Savings_Goals (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     goal_name VARCHAR(100) NOT NULL,
