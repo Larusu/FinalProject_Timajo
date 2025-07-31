@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         if ($stmt->execute()) 
         {
             $_SESSION['messages'][] = "Deleted successfully!";
+            header("Location: list.php");
+            exit();
         } 
         else 
         {
