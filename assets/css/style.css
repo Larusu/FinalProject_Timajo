@@ -273,8 +273,8 @@ input[type="text"] {
 }
 
 .message {
-    background-color: #F9D5E5; 
-    border-left: 5px solid #D2649A;
+    background-color: #f7eaef; 
+    border-left: 5px solid #333333;
     padding: 10px 15px;
     margin-bottom: 10px;
     color: #333;
@@ -283,7 +283,7 @@ input[type="text"] {
 }
 
 .main-header {
-    background-color: #94A3D4;
+    background-color: #000000;
     padding: 15px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -315,7 +315,7 @@ input[type="text"] {
 /*dashboard.php*/
 .dashboard-body {
   background-color: #F4F4F8;
-  background-image: url('../images/dashboard-bg.svg'); /* or .png, .svg, etc. */
+  background-image: url('../images/dashboard-bg2.svg'); /* or .png, .svg, etc. */
   background-size: cover;          /* Makes image cover the entire area */
   background-repeat: no-repeat;    /* Prevents repeating */
   background-position: center;     /* Centers the image */
@@ -334,13 +334,16 @@ input[type="text"] {
 
 #btn-container {
   background-image: url("../images/button-bg.svg");
+  background-size: cover;
   padding: 3rem 2rem;
   margin: 0 auto 4rem;
+  border: 1px solid #E5E5E5; /* Updated border */
   border-radius: 30px;
   max-width: 1200px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
 }
+
 
 .button-group {
   display: flex;
@@ -353,7 +356,7 @@ input[type="text"] {
   text-decoration: none;
   width: 200px;
   height: 18rem;
-  background-color: #26547C; 
+  background-color: #000000; 
   color: #FFFFFF;
   border-radius: 16px;
   font-size: 1.1rem;
@@ -369,15 +372,80 @@ input[type="text"] {
   text-align: center;
   line-height: 1.4;
   padding: 1rem;
-  border: 2px solid #FFD166; 
+  border: 5px solid #ffffff; 
 }
 
 .btn-link:hover {
-  background-color: #1B3B5F; 
-  color: #FFD166; 
+  background-color: #fcfcfc; 
+  color: #000000; 
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
+
+/*list.php*/
+.income-table {
+  width: 90%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+.income-table thead {
+  background-color: #FFD166;
+  color: #333;
+  font-weight: 600;
+}
+
+.income-table th,
+.income-table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.income-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.income-table tfoot {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.income-table tfoot td {
+  padding: 1rem;
+}
+
+/* Optional: Style buttons inside the table */
+.income-table button {
+  background-color: #EF476F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 0 5px;
+}
+
+.income-table button:hover {
+  background-color: #d63b60;
+}
+
+.btn-link2 {
+  text-decoration: none;
+  background-color: #1B3B5F;
+  color: white;
+  font-size: 12px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 
 
 

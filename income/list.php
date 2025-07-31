@@ -8,8 +8,6 @@ $data = $conn->query($query);
 $totalAmount = 0;
 $count = 0;
 
-echo 'NOTE!!!! okaay lang kahit hindi table para kung may custom design kang gagawin... ';
-echo 'Ginawa ko lang to para may reference';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
@@ -46,20 +44,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Incomes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-<!--   header section   -->
+<body class ="dashboard-body">
+
 <?php include '../includes/header.php'; ?>
 
-<!-- NOTE!!!! okaay lang kahit hindi table, okay lang kahit may design -->
-<!-- ginawa ko lang to para may reference -->
-    <table style="border-collapse: collapse; width: 100%;" border="1">
+    <table class="income-table">
         <thead>
             <tr>
                 <th>Source</th>
                 <th>Amount</th>
                 <th>Date</th>
-                <th>Action</th> <!-- FOR BUTTON -->
+                <th>Action</th> 
             </tr>
         </thead>
 
@@ -98,11 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     </table>
     <br><br>
     <!-- gawa ng design dito para mapunta sa list tab -->
-    <a href="add.php">
-        <button type="button">Add Income</button>
-    </a>
-    <a href="../dashboard/index.php">
-        <button type="button">Go back</button>
-    </a>
+    <a href="add.php" class="btn-link2">Add Income</a>
+    <a href="../dashboard/index.php" class="btn-link2">Go back</a>
 </body>
 </html>
