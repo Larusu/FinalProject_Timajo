@@ -17,5 +17,8 @@ require_login();
     <a href="../income/list.php">
         <button type="button">Go to Income List</button>
     </a>
+    <a href="../expenses/list.php">
+        <button type="button">Go to Expenses List</button>
+    </a>
 </body>
 </html>
