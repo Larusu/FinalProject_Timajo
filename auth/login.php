@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     
     if (empty($email) || empty($password)) 
     {
-        $_SESSION['error'] = "Email and password are required.";
+        $_SESSION['messages'][] = "Email and password are required.";
         header("Location: ../index.php");
         exit();
     }
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
      // Try to run the query
     if(!$stmt->execute())
     {
-        $_SESSION['error'] = "Database error: " . $stmt->error;
+        $_SESSION['messages'][] = "Database error: " . $stmt->error;
         header("Location: ../index.php");
         exit();
     }
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     // Check if the user was found with that email
     if ($result->num_rows === 0) 
     {
-        $_SESSION['error'] = "No user found with that email.";
+        $_SESSION['messages'][] = "No user found with that email.";
         header("Location: ../index.php");
         exit();
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     } 
     else 
     {
-        $_SESSION['error'] = "Invalid password.";
+        $_SESSION['messages'][] = "Invalid password.";
         header("Location: ../index.php");
         exit();
     }
