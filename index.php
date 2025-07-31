@@ -9,15 +9,13 @@
 </head>
 <body class="login-body">
   <div class="login-card">
-    <!-- Left: Illustration -->
     <div class="login-illustration">
       <img src="assets/images/login-illustration.svg" alt="Budgeting Illustration" />
     </div>
 
-    <!-- Right: Login form -->
     <div class="login-form">
       <div class="form-header">
-        <p class="small-text">Not a member? <a href="register.php">Register here</a></p>
+        <p class="small-text">Not a member? <a href="auth/register.php">Register here</a></p>
         <h2>Welcome Back!</h2>
         <p class="sub-text">We're happy to see you again.</p>
       </div>
@@ -29,18 +27,25 @@
       <?php endif; ?>
 
       <form action="auth/login.php" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required />
-
+        <input 
+            type="email" 
+            name="email" 
+            placeholder="Enter your email" 
+            value="<?php echo isset($_SESSION['old_email']) ? htmlspecialchars($_SESSION['old_email']) : ''; ?>" 
+            required 
+        />
+        
         <div class="password-wrapper">
-          <input type="password" id="password" name="password" placeholder="Password" required />
-          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <input type="password" id="password" name="password" placeholder="Password" required />
+            <button type="button" class="toggle-password" onclick="togglePassword(this)">
             <img src="assets/images/eye-closed.svg" alt="Show password" />
-          </button>
+            </button>
         </div>
 
-        <p class="recovery"><a href="#">Forgot password?</a></p>
         <button type="submit" class="login-btn">Sign In</button>
-      </form>
+        </form>
+
+        <?php unset($_SESSION['old_email']); ?>
     </div>
   </div>
 

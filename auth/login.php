@@ -8,7 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-    
+
+    // Store email in session to retain it on failed attempts
+    $_SESSION['old_email'] = $email;
+
     if (empty($email) || empty($password)) 
     {
         $_SESSION['messages'][] = "Email and password are required.";
@@ -16,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         exit();
     }
 
-     // Prepare the SQL query to find the user by email
+    // Prepare the SQL query to find the user by email
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);   // Bind the email parameter to the query
 
-     // Try to run the query
-    if(!$stmt->execute())
+    // Try to run the query
+    if (!$stmt->execute())
     {
         $_SESSION['messages'][] = "Database error: " . $stmt->error;
         header("Location: ../index.php");
@@ -47,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         // Password is correct, store user ID in session to keep them logged in
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username']; // Make sure your table has a 'username' column
+
+        // Cleanup: remove preserved email on successful login
+        unset($_SESSION['old_email']);
+
         header("Location: ../dashboard/index.php");
         exit();
     } 
