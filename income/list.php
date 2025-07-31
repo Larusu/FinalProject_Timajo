@@ -85,11 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         </tbody>
 
         <tfoot>
+            <?php if($count > 0):?>
             <tr>
                 <td colspan="2"></td> <!-- Empty 2 columns-->
                 <td>Total Count: <?= $count ?></td>
                 <td>Total Amount: <?= $totalAmount ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
             </tr>
+            <?php endif; ?>
         </tfoot>
     </table>
     <br><br>

@@ -41,9 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <h2>Add Income</h2>
 
     <form method="POST">
-        <input name="source" placeholder="Income Source" required><br><br>
-        <input name="amount" placeholder="Amount" type="number" step="0.01" required><br><br>
-        <input type="date" name="date" required><br>
+        <label for="source">Income Source:</label><br>
+        <input id="source" name="source" placeholder="e.g. Salary, Freelance" required><br><br>
+
+        <label for="amount">Amount:</label><br>
+        <input id="amount" name="amount" placeholder="e.g. 1500.00" type="number" step="0.01" required><br><br>
+
+        <label for="date">Date:</label><br>
+        <input id="date" type="date" name="date" required><br><br>
+
         <button type="submit">Submit</button>
     </form>
     <br><br>

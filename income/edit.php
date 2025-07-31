@@ -69,9 +69,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 <?php include '../includes/header.php'; ?>
 
     <form method="POST">
-        <input name="source" placeholder="<?=$placeholdSource?>"> Source <br>
-        <input name="amount" placeholder="<?=$placeholdAmount?>"> Amount <br>
-        <input name="date" placeholder="<?=$placeholdDate?>"> Date <br>
+        <label for="source">Source:</label><br>
+        <input name="source" placeholder="<?=$placeholdSource?>"><br><br>
+
+        <label for="amount">Amount:</label><br>
+        <input name="amount" placeholder="<?=$placeholdAmount?>"><br><br>
+
+        <label for="date">Date: <?=$placeholdDate?></label><br>
+        <input type="date" name="date"><br><br>
         <button type="submit">Update</button>
     </form>
     <br><br>
