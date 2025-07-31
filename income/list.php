@@ -90,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <?php if($count > 0):?>
             <tr>
                 <td colspan="2"></td> <!-- Empty 2 columns-->
-                <td>Total Count: <?= $count ?></td>
-                <td>Total Amount: <?= $totalAmount ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                <td>Total Count: <?= number_format($count, 2); ?></td>
+                <td>Total Amount: <?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
             </tr>
             <?php endif; ?>
         </tfoot>
