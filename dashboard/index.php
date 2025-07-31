@@ -1,34 +1,42 @@
 <?php
 require_once '../helpers/auth.php';
 require_login();
+include '../includes/header.php'; // Assuming this contains your sidebar HTML and styles
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard | Mr. Budget</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dashboard-body">
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="app-title"><i class="fa-solid fa-piggy-bank"></i></i>Mr. Budget</div>
+      </div>
 
-  <?php include '../includes/header.php'; ?>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="../dashboard/index.php"><i class="fa-solid fa-house-user"></i> Dashboard</a></li>
+          <li><a href="../income/list.php"><i class="fas fa-wallet"></i> Income</a></li>
+          <li><a href="../expenses/list.php"><i class="fas fa-money-bill-wave"></i> Expenses</a></li>
+          <li><a href="../savings_goals/list.php"><i class="fas fa-bullseye"></i> Goals</a></li>
+          <li><a href="../charts/financial_comparison.php"><i class="fas fa-chart-bar"></i> Financial Comparison</a></li>
+          <li><a href="../charts/goal_progress.php"><i class="fas fa-chart-line"></i> Goals Progress</a></li>
+          <li><a href="../dashboard/profile.php"><i class="fas fa-user"></i> Profile</a></li>
+          <li><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <main class="container">
-    <h1 class="dashboard-heading">
-      Welcome to Mr. Budget, <?php echo htmlspecialchars($_SESSION['username']); ?>!
-    </h1>
-    <section id="btn-container">
-    <div class="button-group">
-        <a href="../income/list.php" class="btn-link">Income List</a>
-        <a href="../expenses/list.php" class="btn-link">Expenses List</a>
-        <a href="../goals/list.php" class="btn-link">Savings Goals</a>
-        <a href="../charts/financial_comparison.php" class="btn-link">Financial Comparison</a>
-        <a href="../charts/goal_progress.php" class="btn-link">Goal Progress</a>
-    </div>
-    </section>
-  </main>
-
-  <?php include '../includes/footer.php'; ?>
-
+    <main class="main-content">
+      <h1>Welcome to Mr_Budget!</h1>
+      <p>You are logged in.</p>
+    </main>
+  </div>
 </body>
 </html>

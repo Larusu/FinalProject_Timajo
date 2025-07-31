@@ -4,11 +4,11 @@ function togglePassword(button) {
 
   if (input.type === 'password') {
     input.type = 'text';
-    icon.src = '../assets/images/eye-open.svg'; 
+    icon.src = '..assets/images/eye-open.svg'; 
     icon.alt = 'Hide password';
   } else {
     input.type = 'password';
-    icon.src = '../assets/images/eye-closed.svg';
+    icon.src = '..assets/images/eye-closed.svg';
     icon.alt = 'Show password';
   }
 }

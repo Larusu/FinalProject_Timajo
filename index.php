@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="login-body">
-  <div class="login-card">
+  <div class="login-panel">
     <div class="login-illustration">
       <img src="assets/images/login-illustration.svg" alt="Budgeting Illustration" />
     </div>
@@ -22,7 +22,7 @@
 
       <?php if (isset($_SESSION['messages'])): ?>
         <?php foreach ($_SESSION['messages'] as $message): ?>
-          <p class="error"><?php echo htmlspecialchars($message); ?></p>
+          <?php include 'includes/header.php'; ?>
         <?php endforeach; unset($_SESSION['messages']); ?>
       <?php endif; ?>
 
@@ -42,7 +42,7 @@
             </button>
         </div>
 
-        <button type="submit" class="login-btn">Sign In</button>
+        <button type="submit" class="login-btn">Log In</button>
         </form>
 
         <?php unset($_SESSION['old_email']); ?>

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="login-body">
-  <div class="login-card">
+  <div class="login-panel">
     <div class="login-illustration">
       <img src="../assets/images/login-illustration.svg" alt="Register Illustration" />
     </div>
