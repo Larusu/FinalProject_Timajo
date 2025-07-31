@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <tr>
                 <th><?= $row['category']; ?></th>
                 <th><?= $row['description']; ?></th>
-                <th><?= number_format($amount);?></th>
+                <th><?= number_format($amount, 2);?></th>
                 <th><?= $row['date']; ?></th>
 
                 <th>
