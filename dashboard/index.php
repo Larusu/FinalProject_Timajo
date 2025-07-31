@@ -23,5 +23,8 @@ require_login();
     <a href="../savings_goals/list.php">
         <button type="button">Go to Savings Goals</button>
     </a>
+    <a href="../charts/financial_comparison.php">
+        <button type="button">Go to Financial Comparison</button>
+    </a>
 </body>
 </html>
