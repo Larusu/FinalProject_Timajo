@@ -26,5 +26,8 @@ require_login();
     <a href="../charts/financial_comparison.php">
         <button type="button">Go to Financial Comparison</button>
     </a>
+    <a href="../charts/goal_progress.php">
+        <button type="button">Go to Goal Progress</button>
+    </a>
 </body>
 </html>
