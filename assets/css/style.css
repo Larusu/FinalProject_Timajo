@@ -1,0 +1,13 @@
+.login-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+.login-section {
+    text-align: center;
+    width: 400px;
+    padding: 30px;
+    background-color:khaki;
+    margin: 100px auto; 
+    border-radius: 20px;
+}
