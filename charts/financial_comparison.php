@@ -65,7 +65,7 @@ function getNetBalance(): float
     <h6>Total Expenses:<?=$totalExpensesAmount?></h6><br>
     <h6>Net Balance:<?=$netBalance?></h6><br>
 
-    <canvas id="pieChart" style="width: 150px; height: 150px;"></canvas>
+    <canvas id="pieChart" style="width: 300px; height: 300px;"></canvas>
 
     <a href="../dashboard/index.php">
         <button type="button">Go back</button>
@@ -89,7 +89,7 @@ function getNetBalance(): float
         }]
       },
       options: {
-        responsive: true,
+        responsive: false,
         plugins: {
           legend: {
             position: 'bottom'
