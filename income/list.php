@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         ?>
             <tr>
                 <th><?= $row['source']; ?></th>
-                <th><?= number_format($amount, 2);?></th>
+                <th>₱<?= number_format($amount, 2);?></th>
                 <th><?= $row['date']; ?></th>
 
                 <th>
@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <?php if($count > 0):?>
             <tr>
                 <td colspan="2"></td> <!-- Empty 2 columns-->
-                <td>Total Count: <?= number_format($count, 2); ?></td>
-                <td>Total Amount: <?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                <td>Total Count: <?= $count; ?></td>
+                <td>Total Amount: ₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
             </tr>
             <?php endif; ?>
         </tfoot>
@@ -103,15 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     <!-- Collapsible Form -->
     <div id="collapsibleForm" class="collapsible-form">
-    <form method="POST">
-        <label>Source:</label><br>
-        <input type="text" name="source" required><br>
+    <form method="POST" action="add.php">
+        <label for="source">Income Source:</label><br>
+        <input id="source" name="source" placeholder="e.g. Salary, Freelance" required><br><br>
 
-        <label>Amount:</label><br>
-        <input type="number" name="amount" required><br>
+        <label for="amount">Amount:</label><br>
+        <input id="amount" name="amount" placeholder="e.g. 1500.00" type="number" step="0.01" required><br><br>
 
-        <label>Date:</label><br>
-        <input type="date" name="date" required><br>
+        <label for="date">Date:</label><br>
+        <input id="date" type="date" name="date" required><br><br>
 
         <button type="submit">Add Entry</button>
     </form>
