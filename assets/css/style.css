@@ -270,11 +270,11 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-.income-table thead {
-  background-color: #000000;
-  color: #fff;
-  text-transform: uppercase;
+.income-table {
+  background-color: rgba(0, 0, 0, 0.85); /* instead of solid black */
+  backdrop-filter: blur(5px); /* optional, for frosted-glass effect */
 }
+
 
 .income-table th,
 .income-table td {
@@ -283,9 +283,15 @@ body {
   border-bottom: 1px solid #363535;
 }
 
+.income-table tbody tr {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .income-table tbody tr:hover {
-  background-color: #1b1b1b;
-  transition: background 0.5s ease;
+  transform: scale(1.01); /* Slight zoom */
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1); /* Soft white shadow */
+  z-index: 1;
+  position: relative;
 }
 
 .income-table tfoot {
@@ -301,7 +307,8 @@ body {
 
 /* Buttons inside the table */
 .income-table button {
-  background-color: #000;
+  font-weight: bold;
+  background-color: #e7c816;
   color: #fff;
   border: none;
   padding: 0.4rem 0.8rem;
@@ -312,8 +319,68 @@ body {
 }
 
 .income-table button:hover {
-  background-color: #444;
+  background-color: #c1a713;
+  transition: background-color 0.2s ease;
 }
+
+/*Form Button*/
+.toggle-form-btn {
+  background-color: #e7c816;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  transition: background 0.3s ease;
+}
+
+.toggle-form-btn:hover {
+  background-color: #c1a713;
+}
+
+/*Add form*/
+.collapsible-form {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.collapsible-form form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.collapsible-form input {
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  background-color: #2c2c2c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}
+
+.collapsible-form button[type="submit"] {
+  background-color: #e7c816;
+  border: none;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
 
 
 

@@ -27,3 +27,14 @@ function validatePasswords() {
   return true;
 }
 
+function toggleForm() {
+  const form = document.getElementById("collapsibleForm");
+  if (form.style.maxHeight) {
+    form.style.maxHeight = null;
+    form.style.padding = "0 1rem";
+  } else {
+    form.style.maxHeight = form.scrollHeight + "px";
+    form.style.padding = "1rem";
+  }
+}
+

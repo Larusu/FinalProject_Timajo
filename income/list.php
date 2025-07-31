@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Incomes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body class ="dashboard-body">
@@ -75,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 <th>
                     <form method="POST">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                        <button type="submit" name="delete">Delete</button>
-                        <button type="submit" name="edit">Edit</button>
+                        <button type="submit" name="delete"><i class="fas fa-trash"></i></button>
+                        <button type="submit" name="edit"><i class="fas fa-edit"></i></button>
                     </form>
                 </th>
             </tr>
@@ -94,8 +95,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         </tfoot>
     </table>
     <br><br>
+
+    <!-- Toggle Button -->
+    <button class="toggle-form-btn" onclick="toggleForm()">
+    <i class="fas fa-chevron-down"></i> Add New Entry
+    </button>
+
+    <!-- Collapsible Form -->
+    <div id="collapsibleForm" class="collapsible-form">
+    <form method="POST">
+        <label>Source:</label><br>
+        <input type="text" name="source" required><br>
+
+        <label>Amount:</label><br>
+        <input type="number" name="amount" required><br>
+
+        <label>Date:</label><br>
+        <input type="date" name="date" required><br>
+
+        <button type="submit">Add Entry</button>
+    </form>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+
     <!-- gawa ng design dito para mapunta sa list tab -->
-    <a href="add.php" class="btn-link2">Add Income</a>
-    <a href="../dashboard/index.php" class="btn-link2">Go back</a>
-</body>
 </html>
