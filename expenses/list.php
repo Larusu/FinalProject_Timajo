@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
@@ -8,36 +9,26 @@ $data = $conn->query($query);
 $totalAmount = 0;
 $count = 0;
 
-echo 'NOTE!!!! okaay lang kahit hindi table para kung may custom design kang gagawin... ';
-echo 'Ginawa ko lang to para may reference';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id']);
 
-    if (isset($_POST['delete'])) 
-    {
+    if (isset($_POST['delete'])) {
         $stmt = $conn->prepare("DELETE FROM expenses WHERE id = ?");
-        $stmt->bind_param("i", $id); // i for integer
-        if ($stmt->execute()) 
-        {
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
             $_SESSION['messages'][] = "Deleted successfully!";
-            header("Location: list.php");
+            header("Location: expenses.php");
             exit();
-        } 
-        else 
-        {
+        } else {
             $_SESSION['messages'][] = "Delete failed!";
         }
     }
 
-    if (isset($_POST['edit'])) 
-    {
-        header("Location: edit.php?id=" . $id);
+    if (isset($_POST['edit'])) {
+        header("Location: edit_expense.php?id=" . $id);
         exit();
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -46,67 +37,127 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Expenses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-<!--   header section   -->
+<body class="income-body">
+
 <?php include '../includes/header.php'; ?>
 
-<h2> EXPENSES TAB </h2>
-
-<!-- NOTE!!!! okaay lang kahit hindi table, okay lang kahit may design -->
-<!-- ginawa ko lang to para may reference -->
-    <table style="border-collapse: collapse; width: 100%;" border="1">
+<div class="income-layout">
+    <table class="income-table">
         <thead>
             <tr>
                 <th>Category</th>
                 <th>Description</th>
                 <th>Amount</th>
                 <th>Date</th>
-                <th>Action</th> <!-- FOR BUTTON -->
+                <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
-        <?php 
-            while ($row = mysqli_fetch_assoc($data)) {
-            $amount = $row['amount']; 
+        <?php while ($row = mysqli_fetch_assoc($data)): 
+            $amount = $row['amount'];
             $totalAmount += $amount;
             $count++;
         ?>
             <tr>
-                <th><?= $row['category']; ?></th>
-                <th><?= $row['description']; ?></th>
-                <th><?= number_format($amount, 2);?></th>
-                <th><?= $row['date']; ?></th>
-
-                <th>
-                    <form method="POST">
+                <td><?= $row['category']; ?></td>
+                <td><?= $row['description']; ?></td>
+                <td>₱<?= number_format($amount, 2); ?></td>
+                <td><?= $row['date']; ?></td>
+                <td>
+                    <form method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                        <button type="submit" name="delete">Delete</button>
-                        <button type="submit" name="edit">Edit</button>
+                        <button type="submit" name="delete"><i class="fas fa-trash"></i></button>
                     </form>
-                </th>
+
+                    <button 
+                        type="button" 
+                        class="edit-btn" 
+                        data-id="<?= $row['id'] ?>" 
+                        data-category="<?= htmlspecialchars($row['category']) ?>" 
+                        data-description="<?= htmlspecialchars($row['description']) ?>" 
+                        data-amount="<?= $row['amount'] ?>" 
+                        data-date="<?= $row['date'] ?>" 
+                        onclick="openExpenseEditModal(this)"
+                    >
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
             </tr>
-        <?php } ?>
+        <?php endwhile; ?>
         </tbody>
 
         <tfoot>
-            <?php if($count > 0):?>
+            <?php if ($count > 0): ?>
             <tr>
-                <td colspan="3"></td> <!-- Empty 3 columns-->
-                <td>Total Count: <?= number_format($count, 2); ?></td>
-                <td>Total Amount: <?= number_format($totalAmount); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                <td colspan="2"></td>
+                <td>Total Count: <?= $count; ?></td>
+                <td>Total Amount: ₱<?= number_format($totalAmount, 2); ?></td>
             </tr>
             <?php endif; ?>
         </tfoot>
     </table>
-    <br><br>
-    <!-- gawa ng design dito para mapunta sa list tab -->
-    <a href="add.php">
-        <button type="button">Add Expense</button>
-    </a>
-    <a href="../dashboard/index.php">
-        <button type="button">Go back</button>
-    </a>
+
+    <!-- Edit Modal -->
+    <div id="editExpenseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeExpenseEditModal()">&times;</span>
+            <h3>Edit Expense Entry</h3>
+            <form id="editExpenseForm" method="POST" action="edit.php">
+                <input type="hidden" name="id" id="edit-expense-id">
+
+                <label>Category:</label><br>
+                <input type="text" name="category" id="edit-expense-category" required><br>
+
+                <label>Description:</label><br>
+                <input type="text" name="description" id="edit-expense-description" required><br>
+
+                <label>Amount:</label><br>
+                <input type="number" name="amount" id="edit-expense-amount" required><br>
+
+                <label>Date:</label><br>
+                <input type="date" name="date" id="edit-expense-date" required><br>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Collapsible Add Expense Form -->
+    <div class="add-income-container">
+        <button class="toggle-form-btn" onclick="toggleForm()">
+            <i class="fas fa-chevron-down"></i> Add New Expense
+        </button>
+
+        <div id="collapsibleForm" class="collapsible-form">
+            <form method="POST" action="add.php">
+                <label>Category:</label><br>
+                <input type="text" name="category" required><br>
+
+                <label>Description:</label><br>
+                <input type="text" name="description" required><br>
+
+                <label>Amount:</label><br>
+                <input type="number" name="amount" required><br>
+
+                <label>Date:</label><br>
+                <input type="date" name="date" required><br>
+
+                <button type="submit">Add Entry</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php if (isset($_SESSION['messages'])): ?>
+    <div class="flash-toast"><?= $_SESSION['messages'][0]; ?></div>
+    <?php unset($_SESSION['messages']); ?>
+<?php endif; ?>
+
+<script src="../assets/js/script.js"></script>
+
 </body>
 </html>

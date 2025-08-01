@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
@@ -55,47 +56,28 @@ function getNetBalance(): float
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Income Vs Expenses</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class ="financial_comparison-body">
+
     <?php include '../includes/header.php'; ?>
 
-    <h1>Financial Comparison</h1><br>
-    <h6>Total Income:<?=$totalIncomeAmount?></h6><br>
-    <h6>Total Expenses:<?=$totalExpensesAmount?></h6><br>
-    <h6>Net Balance:<?=$netBalance?></h6><br>
+  <div class="main-container">
+    <div class="top-row">
+      <div class="total-income"><h2>Total Income</h2></div>
+      <div class="total-expense"><h2>Total Expenses</h2></div>
+      <div class="net-balance"><h2>Net Balance</h2></div>
+    </div>
 
-    <canvas id="pieChart" style="width: 300px; height: 300px;"></canvas>
+    <div class="bottom-row">
+      <div class="ie-pie-chart"></div>
+    </div>
+  </div>
 
-    <a href="../dashboard/index.php">
-        <button type="button">Go back</button>
-    </a>
+
 </body>
-<script>
-    const totalIncome = <?php echo json_encode($totalIncomeAmount); ?>;
-    const totalExpense = <?php echo json_encode($totalExpensesAmount); ?>;
 
-    // Render with Chart.js
+<script src="../assets/js/script.js"></script>
 
-    const ctx = document.getElementById('pieChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Income', 'Expenses'],
-        datasets: [{
-          label: 'Income vs Expenses',
-          data: [totalIncome, totalExpense],
-          backgroundColor: ['#ff6384', '#36a2eb'] //['#ff6384', '#36a2eb', '#ffcd56']
-        }]
-      },
-      options: {
-        responsive: false,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }
-    });
-</script>
 </html>

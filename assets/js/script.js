@@ -27,4 +27,96 @@ function validatePasswords() {
   return true;
 }
 
+function toggleForm() {
+  const form = document.getElementById("collapsibleForm");
+
+  if (form.classList.contains("open")) {
+    form.style.maxHeight = 0;
+    form.classList.remove("open");
+  } else {
+    form.classList.add("open");
+
+    // Force reflow to ensure scrollHeight is accurate
+    void form.offsetHeight;
+
+    form.style.maxHeight = form.scrollHeight + "px";
+  }
+}
+
+function openEditModal(button) {
+  const id = button.getAttribute('data-id');
+  const source = button.getAttribute('data-source');
+  const amount = button.getAttribute('data-amount');
+  const date = button.getAttribute('data-date');
+
+  document.getElementById('edit-id').value = id;
+  document.getElementById('edit-source').value = source;
+  document.getElementById('edit-amount').value = amount;
+  document.getElementById('edit-date').value = date;
+
+  document.getElementById('editModal').style.display = 'flex';
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').style.display = 'none';
+}
+
+function openExpenseEditModal(button) {
+  const id = button.getAttribute('data-id');
+  const category = button.getAttribute('data-category');
+  const description = button.getAttribute('data-description');
+  const amount = button.getAttribute('data-amount');
+  const date = button.getAttribute('data-date');
+
+  document.getElementById('edit-expense-id').value = id;
+  document.getElementById('edit-expense-category').value = category;
+  document.getElementById('edit-expense-description').value = description;
+  document.getElementById('edit-expense-amount').value = amount;
+  document.getElementById('edit-expense-date').value = date;
+  document.getElementById('editExpenseModal').style.display = 'flex';
+}
+
+
+function closeExpenseEditModal() {
+  document.getElementById('editExpenseModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+  const incomeModal = document.getElementById('editModal');
+  const expenseModal = document.getElementById('editExpenseModal');
+
+  if (event.target === incomeModal) {
+    closeEditModal();
+  } else if (event.target === expenseModal) {
+    closeExpenseEditModal();
+  }
+}
+
+
+function openGoalEditModal(btn) {
+    document.getElementById('edit-goal-id').value = btn.dataset.id;
+    document.getElementById('edit-goal-name').value = btn.dataset.goal;
+    document.getElementById('edit-goal-target').value = btn.dataset.target;
+    document.getElementById('edit-goal-saved').value = btn.dataset.saved;
+    document.getElementById('edit-goal-start').value = btn.dataset.start;
+    document.getElementById('edit-goal-end').value = btn.dataset.end;
+    document.getElementById('editGoalModal').style.display = 'flex';
+}
+
+function closeGoalEditModal() {
+    document.getElementById('editGoalModal').style.display = 'none';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
