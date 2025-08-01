@@ -646,33 +646,112 @@ body {
 }
 
 /*financial_comparison.php*/
-.ttn-container {
+.financial-comparison-body {
+  background-color: #000;
+  margin-left: 240px;
+  padding: 2rem;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
   display: flex;
-}
-.total-income {
-  background-color: #292929;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.total-income h2 {
+.top-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.total-label {
+  flex: 1;
+  background: #070707;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.total-label:hover {
+  transform: scale(1.03);
+}
+
+.total-label h2 {
   font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #f8cf2d;
+}
+
+.total-label .amount {
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #fff;
 }
-.total-expense {
-  background-color: #292929;
+
+.amount.positive {
+  color: #4caf50;
 }
 
-.total-expense h2 {
-  font-size: 1.4rem;
-  color: #fff;}
-
-.net-balance {
-  background-color: #292929;
+.amount.negative {
+  color: #e53935;
 }
 
-.net-balance h2 {
-  font-size: 1.4rem;
-  color: #fff;
+.bottom-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
+.chart-and-status {
+  background: #070707;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  border-radius: 16px;
+  transition: transform 1s ease;
+  text-align: center;
+  background-color: #111;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.chart-and-status:hover{
+  transform: scale(1.03);
+}
+
+.ie-pie-chart {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+canvas#pieChart {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+.budget-status {
+  color: #f8cf2d;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 1rem;
+  border: 4px solid #333;
+  border-radius: 20px;
+  max-width: 200px;
+}
+
+
+
 
 
 
