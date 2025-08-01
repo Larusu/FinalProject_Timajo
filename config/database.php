@@ -16,7 +16,7 @@ if (!$conn)
 $sql = "CREATE DATABASE IF NOT EXISTS $db";
 if (!mysqli_query($conn, $sql)) 
 {
-	die('Error creating database: ' . mysqli_error($conn));
+	die('Connection failed: ' . mysqli_connect_error());
 }
 
 // Connect to the newly created database
@@ -54,7 +54,7 @@ $savingsGoalsCreate = "CREATE TABLE IF NOT EXISTS Savings_Goals (
     saved_amount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
     start_date DATE NOT NULL,
     end_date DATE,
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );";
 
 if (!mysqli_query($conn, $usersCreate) || 
@@ -62,6 +62,6 @@ if (!mysqli_query($conn, $usersCreate) ||
     !mysqli_query($conn, $expensesCreate) || 
     !mysqli_query($conn, $savingsGoalsCreate)) 
 {
-    die('Error creating tables: ' . mysqli_error($conn));
+    die('Connection failed: ' . mysqli_connect_error());
 }
 ?>
