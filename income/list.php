@@ -69,18 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $count++;
         ?>
             <tr>
-<<<<<<< HEAD
                 <td><?= $row['source']; ?></td>
                 <td><?= number_format($amount, 2);?></td>
                 <td><?= $row['date']; ?></td>
                 <td>
-=======
-                <th><?= $row['source']; ?></th>
-                <th>₱<?= number_format($amount, 2);?></th>
-                <th><?= $row['date']; ?></th>
-
-                <th>
->>>>>>> 229927e57606c338f5243f897a3b0400fb69e202
                     <form method="POST">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
                         <button type="submit" name="delete"><i class="fas fa-trash"></i></button>
