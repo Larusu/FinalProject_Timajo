@@ -38,12 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $_SESSION['messages'][] = "Delete failed!";
         }
     }
-
-    if (isset($_POST['edit'])) 
-    {
-        header("Location: edit.php?id=" . $id);
-        exit();
-    }
 }
 
 ?>
