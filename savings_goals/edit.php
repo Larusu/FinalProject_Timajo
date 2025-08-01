@@ -5,7 +5,8 @@ require_once '../helpers/auth.php';
 require_login();
 
 // Only allow POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+{
     $_SESSION['messages'][] = "Invalid request.";
     header("Location: list.php");
     exit();
