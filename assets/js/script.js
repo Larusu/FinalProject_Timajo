@@ -107,6 +107,79 @@ function closeGoalEditModal() {
     document.getElementById('editGoalModal').style.display = 'none';
 }
 
+//Pie chart for financial comparison
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("pieChart");
+  const ctx = canvas?.getContext("2d");
+
+  if (ctx) {
+    // Create gradient for each slice
+    const incomeGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    incomeGradient.addColorStop(0, "#111");
+    incomeGradient.addColorStop(1, "#333");
+
+    const expenseGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    expenseGradient.addColorStop(0, "#111");
+    expenseGradient.addColorStop(1, "#333");
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Income", "Expenses"],
+        datasets: [{
+          label: "Income vs Expenses",
+          data: [totalIncome, totalExpenses],
+          backgroundColor: [incomeGradient, expenseGradient],
+          borderColor: ["#777", "#555"],
+          borderWidth: 2,
+          hoverOffset: -10
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: "#fff"
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.label || '';
+                let value = context.raw || 0;
+                return `${label}: ₱${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+});
+
+const statusEl = document.getElementById("budgetStatus");
+
+if (statusEl) {
+  const difference = totalIncome - totalExpenses;
+
+  if (difference > 0) {
+    statusEl.textContent = "You are under budget";
+    statusEl.style.color = "#ffffffff"; 
+  } else if (difference < 0) {
+    statusEl.textContent = "You are over budget";
+    statusEl.style.color = "#ffffffff"; 
+  } else {
+    statusEl.textContent = "Budget balanced";
+    statusEl.style.color = "#ffffffff"; 
+  }
+}
+
+
+
+
+
 
 
 

@@ -59,25 +59,48 @@ function getNetBalance(): float
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class ="financial_comparison-body">
+<body class="financial-comparison-body">
 
-    <?php include '../includes/header.php'; ?>
+  <?php include '../includes/header.php'; ?>
 
   <div class="main-container">
+    
     <div class="top-row">
-      <div class="total-income"><h2>Total Income</h2></div>
-      <div class="total-expense"><h2>Total Expenses</h2></div>
-      <div class="net-balance"><h2>Net Balance</h2></div>
+      <div class="total-label">
+        <h2>Total Income</h2>
+        <p class="amount">₱<?= number_format($totalIncomeAmount, 2); ?></p>
+      </div>
+
+      <div class="total-label">
+        <h2>Total Expenses</h2>
+        <p class="amount">₱<?= number_format($totalExpensesAmount, 2); ?></p>
+      </div>
+
+      <div class="total-label">
+        <h2>Net Balance</h2>
+        <p class="amount <?= $netBalance >= 0 ? 'positive' : 'negative' ?>">
+          ₱<?= number_format($netBalance, 2); ?>
+        </p>
+      </div>
     </div>
 
     <div class="bottom-row">
-      <div class="ie-pie-chart"></div>
+      <div class="chart-and-status">
+        <canvas id="pieChart"></canvas>
+        <div class="budget-status" id="budgetStatus"></div>
+      </div>
     </div>
+
   </div>
-
-
 </body>
 
+
+<script>
+  const totalIncome = <?= json_encode($totalIncomeAmount) ?>;
+  const totalExpenses = <?= json_encode($totalExpensesAmount) ?>;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../assets/js/script.js"></script>
 
 </html>
