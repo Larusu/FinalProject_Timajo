@@ -3,8 +3,18 @@ include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-$query = "SELECT * FROM expenses";
-$data = $conn->query($query);
+$query = "SELECT * FROM expenses WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $__SESSION['user_id']);
+
+if (!$stmt->execute())
+{
+    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    header("Location: ../index.php");
+    exit();
+}
+
+$data = $stmt->get_result();
 $totalAmount = 0;
 $count = 0;
 
@@ -60,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <tr>
                 <th>Category</th>
                 <th>Description</th>
-                <th>Amount</th>
                 <th>Date</th>
+                <th>Amount</th>
                 <th>Action</th> <!-- FOR BUTTON -->
             </tr>
         </thead>
@@ -76,8 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <tr>
                 <th><?= $row['category']; ?></th>
                 <th><?= $row['description']; ?></th>
-                <th><?= number_format($amount, 2);?></th>
                 <th><?= $row['date']; ?></th>
+                <th>₱<?= number_format($amount, 2);?></th>
 
                 <th>
                     <form method="POST">
@@ -94,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <?php if($count > 0):?>
             <tr>
                 <td colspan="3"></td> <!-- Empty 3 columns-->
-                <td>Total Count: <?= number_format($count, 2); ?></td>
-                <td>Total Amount: <?= number_format($totalAmount); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                <td>₱<?= number_format($totalAmount); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                <td>Total Count: <?= $count; ?></td>
             </tr>
             <?php endif; ?>
         </tfoot>

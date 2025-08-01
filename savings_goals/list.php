@@ -3,8 +3,18 @@ include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-$query = "SELECT * FROM savings_goals";
-$data = $conn->query($query);
+$query = "SELECT * FROM savings_goals WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $__SESSION['user_id']);
+
+if (!$stmt->execute())
+{
+    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    header("Location: ../index.php");
+    exit();
+}
+
+$data = $stmt->get_result();
 $totalAmount = 0;
 $count = 0;
 
@@ -71,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         <?php  while ($row = mysqli_fetch_assoc($data)) { ?>
             <tr>
                 <th><?= $row['goal_name']; ?></th>
-                <th><?= number_format($row['target_amount'], 2);?></th>
-                <th><?= number_format($row['saved_amount'], 2);?></th>
+                <th>₱<?= number_format($row['target_amount'], 2);?></th>
+                <th>₱<?= number_format($row['saved_amount'], 2);?></th>
                 <th><?= $row['start_date']; ?></th>
                 <th><?= $row['end_date']; ?></th>
 
