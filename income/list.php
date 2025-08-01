@@ -3,7 +3,6 @@ include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-
 $query = "SELECT * FROM income WHERE user_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $_SESSION['user_id']);

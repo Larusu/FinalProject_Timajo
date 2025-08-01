@@ -22,19 +22,23 @@ $count = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id']);
 
-    if (isset($_POST['delete'])) {
+    if (isset($_POST['delete'])) 
+    {
         $stmt = $conn->prepare("DELETE FROM savings_goals WHERE id = ?");
         $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
+        if ($stmt->execute()) 
+        {
             $_SESSION['messages'][] = "Deleted successfully!";
             header("Location: list.php");
             exit();
-        } else {
+        } else 
+        {
             $_SESSION['messages'][] = "Delete failed!";
         }
     }
 
-    if (isset($_POST['edit'])) {
+    if (isset($_POST['edit'])) 
+    {
         header("Location: edit.php?id=" . $id);
         exit();
     }
