@@ -5,7 +5,7 @@
 
 /*=============================== index.php ===============================*/
 .login-body {
-  background: #F2F0EB;
+  background: linear-gradient(to left, #000000, #4b4a4a);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -19,25 +19,53 @@
   width: 900px;
   max-width: 100%;
   height: 600px;
-  background: white;
+
+  background-color: transparent;               
+  backdrop-filter: blur(10px);             
+  border: 1px solid rgba(255, 255, 255, 0.2);   
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);  
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+  color: white;                               
+}
+
+.login-panel:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); 
 }
 
 .login-illustration {
   flex: 1;
-  background: #000000;
+  background: transparent;
+  border-right: solid 1px #555;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
 }
 
-.login-illustration img {
-  max-width: 100%;
-  border-radius: 20px;
-  height: auto;
+.illustration-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  justify-content: center; 
+}
+
+.piggy-icon {
+  width: 300px;
+  height: 300px;
+  fill: #fcd601;
+  margin-bottom: 1rem; 
+}
+
+.app-title {
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  margin: 0;
 }
 
 .login-form {
@@ -65,11 +93,8 @@
   top: -100px; 
 }
 
-.form-header .small-text-2 {
-  text-align: right;
-  font-size: 0.9rem;
-  position: relative;
-  top: -35px; 
+.form-header .small-text a {
+  color: #ece957;
 }
 
 input[type="email"],
@@ -147,6 +172,10 @@ input[type="text"] {
 }
 
 /*=============================== register.php ===============================*/
+
+.form-header .small-text-2 a {
+  color: #ece957;
+}
 
 .register-btn {
   width: 100%;
@@ -252,35 +281,54 @@ body {
 
 /*=============================== Income/list.php ===============================*/
 
-.dashboard-body {
-  background: linear-gradient(to right, #000000, #222020);
+.income-body {
+  background-color: #000000;
   margin-left: 240px;
   padding: 2rem;
+  position: relative;
 }
 
 .income-table {
   width: 90%;
   margin: 2rem auto;
-  border-collapse: collapse;
+  border-collapse: separate; /* changed from collapse */
+  border-spacing: 0; /* removes gaps between cells */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
-  background-color: #000000;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  border: 1px solid #555; /* consistent outer border */
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
-.income-table {
-  background-color: rgba(0, 0, 0, 0.85); /* instead of solid black */
-  backdrop-filter: blur(5px); /* optional, for frosted-glass effect */
+/* Round corners only on outermost cells */
+.income-table thead th:first-child {
+  border-top-left-radius: 12px;
 }
-
+.income-table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+.income-table tfoot td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.income-table tfoot td:last-child {
+  border-bottom-right-radius: 12px;
+}
 
 .income-table th,
 .income-table td {
+  background-color: transparent;
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #363535;
+  border: 1px solid #555;
+}
+
+.income-table thead th {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .income-table tbody tr {
@@ -288,14 +336,14 @@ body {
 }
 
 .income-table tbody tr:hover {
-  transform: scale(1.01); /* Slight zoom */
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1); /* Soft white shadow */
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
   z-index: 1;
   position: relative;
 }
 
 .income-table tfoot {
-  background-color: #000000;
+  background-color: transparent;
   font-weight: bold;
 }
 
@@ -303,7 +351,10 @@ body {
   padding: 1rem;
   text-align: right;
   color: #ffffff;
+  border: 1px solid #555;
 }
+
+
 
 /* Buttons inside the table */
 .income-table button {

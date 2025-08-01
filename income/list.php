@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class ="dashboard-body">
+<body class ="income-body">
 
 <?php include '../includes/header.php'; ?>
 
@@ -69,18 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $count++;
         ?>
             <tr>
-                <th><?= $row['source']; ?></th>
-                <th><?= number_format($amount, 2);?></th>
-                <th><?= $row['date']; ?></th>
-
-                <th>
+                <td><?= $row['source']; ?></td>
+                <td><?= number_format($amount, 2);?></td>
+                <td><?= $row['date']; ?></td>
+                <td>
                     <form method="POST">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
                         <button type="submit" name="delete"><i class="fas fa-trash"></i></button>
                         <button type="submit" name="edit"><i class="fas fa-edit"></i></button>
                     </form>
-                </th>
+                </td>
             </tr>
+
         <?php } ?>
         </tbody>
 
