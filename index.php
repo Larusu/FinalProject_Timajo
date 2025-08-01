@@ -27,7 +27,9 @@
 
       <?php if (isset($_SESSION['messages'])): ?>
         <?php foreach ($_SESSION['messages'] as $message): ?>
-          <?php include 'includes/header.php'; ?>
+          <div class="message">
+                <span><?= htmlspecialchars($message) ?></span>
+            </div>
         <?php endforeach; unset($_SESSION['messages']); ?>
       <?php endif; ?>
 

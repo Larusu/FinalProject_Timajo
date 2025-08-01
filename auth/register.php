@@ -14,6 +14,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows !== 0)
+    {
+      $_SESSION['messages'][] = "Email already exists.";
+      header("Location: register.php");
+      exit();
+    }
+
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows !== 0)
+    {
+      $_SESSION['messages'][] = "Username already exists.";
+      header("Location: register.php");
+      exit();
+    }
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
@@ -23,12 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['success'] = "Registration successful! You can now login.";
         header("Location: register.php");
         exit();
-    } else {
-        $_SESSION['messages'][] = "Username or email already exists.";
-        header("Location: register.php");
-        exit();
     }
-}
+  }
 ?>
 
 <!DOCTYPE html>

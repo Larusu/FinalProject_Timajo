@@ -4,8 +4,18 @@ include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-$query = "SELECT * FROM savings_goals";
-$data = $conn->query($query);
+$query = "SELECT * FROM savings_goals WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $__SESSION['user_id']);
+
+if (!$stmt->execute())
+{
+    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    header("Location: ../index.php");
+    exit();
+}
+
+$data = $stmt->get_result();
 $totalAmount = 0;
 $count = 0;
 
