@@ -61,24 +61,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body class="profile-body">
+    
     <?php include '../includes/header.php'; ?>
-    <h1>Change Profile</h1>
-    <form method="POST">
-        <label for="username">Username:</label><br>
-        <input name="username" placeholder="<?=$username?>" value="<?=$username?>"><br>
+    
+    <div class="profile-label">
+        <i class="fa-solid fa-address-card"></i>
+        <h1>Change Profile</h1>
+    </div>
+    
+    <div class="form-container">
+        <form method="POST">
+            <label for="username">Username:</label><br>
+            <input name="username" placeholder="<?=$username?>" value="<?=$username?>"><br>
 
-        <label for="email">Email:</label><br>
-        <input name="email" placeholder="<?=$email?>" value="<?=$email?>"><br>
+            <label for="email">Email:</label><br>
+            <input name="email" placeholder="<?=$email?>" value="<?=$email?>"><br>
 
-        <label type="password" for="password">New Password:</label><br>
-        <input name="password"><br>
+            <label name="password" for="password">New Password:</label><br>
+            <input type="password"><br>
 
-        <label for="confirmPassword">Confirm Password:</label><br>
-        <input type="password" name="confirmPassword"><br>
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input type="password" name="confirmPassword"><br>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
