@@ -46,17 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <title>List of Incomes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/script.js" defer></script>
 </head>
 <body class ="income-body">
 
 <?php include '../includes/header.php'; ?>
-
-    <table class="income-table">
+<div class="members">
+    <table role = "grid">
         <thead>
             <tr>
                 <th>Source</th>
-                <th>Amount</th>
                 <th>Date</th>
+                <th>Amount</th>
                 <th>Action</th> 
             </tr>
         </thead>
@@ -70,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         ?>
             <tr>
                 <td><?= $row['source']; ?></td>
-                <td><?= number_format($amount, 2);?></td>
                 <td><?= $row['date']; ?></td>
+                <td>₱<?= number_format($amount, 2);?></td>
                 <td>
                     <form method="POST">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -87,37 +88,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         <tfoot>
             <?php if($count > 0):?>
             <tr>
-                <td colspan="2"></td> <!-- Empty 2 columns-->
+                <td colspan="1"></td> <!-- Empty 2 columns-->
+                <td colspan="1">
+                    <td>₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
                 <td>Total Count: <?= $count; ?></td>
-                <td>Total Amount: ₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
             </tr>
             <?php endif; ?>
         </tfoot>
     </table>
+</div>
     <br><br>
-
-    <!-- Toggle Button -->
-    <button class="toggle-form-btn" onclick="toggleForm()">
-    <i class="fas fa-chevron-down"></i> Add New Entry
-    </button>
-
-    <!-- Collapsible Form -->
-    <div id="collapsibleForm" class="collapsible-form">
-    <form method="POST" action="add.php">
-        <label for="source">Income Source:</label><br>
-        <input id="source" name="source" placeholder="e.g. Salary, Freelance" required><br><br>
-
-        <label for="amount">Amount:</label><br>
-        <input id="amount" name="amount" placeholder="e.g. 1500.00" type="number" step="0.01" required><br><br>
-
-        <label for="date">Date:</label><br>
-        <input id="date" type="date" name="date" required><br><br>
-
-        <button type="submit">Add Entry</button>
-    </form>
-    </div>
-
     <script src="../assets/js/script.js"></script>
-
-    <!-- gawa ng design dito para mapunta sa list tab -->
 </html>
