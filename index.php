@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Mr_Budget</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="login-body">
@@ -43,10 +44,10 @@
         />
         
         <div class="password-wrapper">
-            <input type="password" id="password" name="password" placeholder="Password" required />
-            <button type="button" class="toggle-password" onclick="togglePassword(this)">
-            <img src="assets/images/eye-closed.svg" alt="Show password" />
-            </button>
+          <input type="password" id="password" name="password" placeholder="Password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
         </div>
 
         <button type="submit" class="login-btn">Log In</button>

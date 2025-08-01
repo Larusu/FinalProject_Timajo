@@ -1,17 +1,20 @@
 function togglePassword(button) {
   const input = button.previousElementSibling;
-  const icon = button.querySelector('img');
+  const icon = button.querySelector('i');
 
   if (input.type === 'password') {
     input.type = 'text';
-    icon.src = '..assets/images/eye-open.svg'; 
-    icon.alt = 'Hide password';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+    icon.setAttribute('title', 'Hide password');
   } else {
     input.type = 'password';
-    icon.src = '..assets/images/eye-closed.svg';
-    icon.alt = 'Show password';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+    icon.setAttribute('title', 'Show password');
   }
 }
+
 
 function validatePasswords() {
   const password = document.getElementById('password').value;
@@ -175,6 +178,115 @@ if (statusEl) {
     statusEl.style.color = "#ffffffff"; 
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("dashboardPieChart");
+  const ctx = canvas?.getContext("2d");
+
+  if (ctx) {
+    // Create gradient for each slice
+    const incomeGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    incomeGradient.addColorStop(0, "#111");
+    incomeGradient.addColorStop(1, "#333");
+
+    const expenseGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    expenseGradient.addColorStop(0, "#111");
+    expenseGradient.addColorStop(1, "#333");
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Income", "Expenses"],
+        datasets: [{
+          label: "Income vs Expenses",
+          data: [totalIncome, totalExpenses],
+          backgroundColor: [incomeGradient, expenseGradient],
+          borderColor: ["#777", "#555"],
+          borderWidth: 2,
+          hoverOffset: -10
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: "#fff"
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.label || '';
+                let value = context.raw || 0;
+                return `${label}: ₱${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("lineChart");
+  const ctx = canvas?.getContext("2d");
+
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: chartMonths,
+        datasets: [
+          {
+            label: 'Income',
+            data: chartIncomes,
+            borderColor: '#4caf50',
+            backgroundColor: 'rgba(76, 175, 80, 0.2)',
+            tension: 0.3
+          },
+          {
+            label: 'Expenses',
+            data: chartExpenses,
+            borderColor: '#f44336',
+            backgroundColor: 'rgba(244, 67, 54, 0.2)',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.dataset.label}: ₱${context.raw.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#aaa' },
+            grid: { color: '#333' }
+          },
+          y: {
+            ticks: { color: '#aaa' },
+            grid: { color: '#333' }
+          }
+        }
+      }
+    });
+  }
+});
+
 
 
 

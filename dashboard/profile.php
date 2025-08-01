@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $updateQuery = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param("sssi", $newUsername, $newEmail, $newPassword, $_SESSION['user_id']);
+    $stmt->bind_param("sssi", $newUsername, $newEmail, $hashedPassword, $_SESSION['user_id']);
 
     if($stmt->execute())
     {
@@ -68,27 +68,29 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     
     <?php include '../includes/header.php'; ?>
     
-    <div class="profile-label">
-        <i class="fa-solid fa-address-card"></i>
-        <h1>Change Profile</h1>
-    </div>
-    
-    <div class="form-container">
-        <form method="POST">
-            <label for="username">Username:</label><br>
-            <input name="username" placeholder="<?=$username?>" value="<?=$username?>"><br>
+    <div class="profile-container">
+        <div class="profile-label">
+            <i class="fa-solid fa-address-card"></i>
+            <h1>Change Profile</h1>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST">
+                <label for="username">Username:</label><br>
+                <input name="username" placeholder="<?=$username?>" value="<?=$username?>"><br>
 
-            <label for="email">Email:</label><br>
-            <input name="email" placeholder="<?=$email?>" value="<?=$email?>"><br>
+                <label for="email">Email:</label><br>
+                <input name="email" placeholder="<?=$email?>" value="<?=$email?>"><br>
 
-            <label name="password" for="password">New Password:</label><br>
-            <input type="password"><br>
+                <label for="password">New Password:</label><br>
+                <input type="password" name="password"><br>
 
-            <label for="confirmPassword">Confirm Password:</label><br>
-            <input type="password" name="confirmPassword"><br>
+                <label for="confirmPassword">Confirm Password:</label><br>
+                <input type="password" name="confirmPassword"><br>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>  
 </body>
 </html>

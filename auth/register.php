@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register - Mr_Budget</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="login-body">
   <div class="login-panel">
@@ -103,16 +104,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="email" name="email" placeholder="Enter your email" required />
 
         <div class="password-wrapper">
-          <input type="password" id="password" name="password" placeholder="Create a password" required />
+          <input type="password" id="password" name="password" placeholder="Password" required />
           <button type="button" class="toggle-password" onclick="togglePassword(this)">
-            <img src="../assets/images/eye-closed.svg" alt="Show password" />
+            <i class="fa-solid fa-eye-slash"></i>
           </button>
         </div>
 
-        <div class="password-wrapper">
+         <div class="password-wrapper">
           <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
           <button type="button" class="toggle-password" onclick="togglePassword(this)">
-            <img src="../assets/images/eye-closed.svg" alt="Show password" />
+            <i class="fa-solid fa-eye-slash"></i>
           </button>
         </div>
 

@@ -270,14 +270,130 @@ input[type="text"] {
 
 
 /*=============================== dashboard/index.php ===============================*/
-
 body {
-  background-color: #000000;
-}
-.main-content {
-  margin-left: 240px; 
+  background-color: #000;
+  color: #fff;
+  margin-left: 240px;
   padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.main-content {
+  display: flex;
+  justify-content: center;
+}
+
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.upper-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.upper-row-boxes {
+  background: #1f1f1f;
+  padding: 1.2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+.upper-row-boxes h6 {
+  font-size: 1rem;
+  color: #f8cf2d;
+  margin-bottom: 0.5rem;
+}
+
+.upper-row-boxes p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.upper-row-boxes .positive {
+  color: #4caf50;
+}
+
+.upper-row-boxes .negative {
+  color: #e53935;
+}
+
+.middle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.dashboard-card {
+  background: #1f1f1f;
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.dashboard-card h6 {
+  font-size: 1.1rem;
+  color: #f8cf2d;
+  margin-bottom: 1rem;
+}
+
+canvas#dashboardPieChart {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 250px;
+}
+
+.goal-item {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.progress-container {
+  background-color: #444;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 10px;
+  margin: 0.5rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #f8cf2d, #ffd700);
+  transition: width 0.5s ease-in-out;
+}
+
+.bottom-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dashboard-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dashboard-card ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.dashboard-card ul li a:hover {
+  color: #f8cf2d;
+}
+
+
+
 
 /*=============================== Income/list.php ===============================*/
 
@@ -758,29 +874,36 @@ canvas#pieChart {
   position: relative;
 }
 
+.profile-container {
+  background: linear-gradient(to right, #000000, #3c3c3c);
+  border: solid 2px #333;
+  border-radius: 20px;
+}
+
 .profile-label {
-  background-color: #888;
+  background: transparent;
+  padding: 0px 20px;
   align-items: center;
   display: flex;
   color: #fff;
+  gap: 15px;
 }
 
 .profile-label i {
-  width: 50px;
+  font-size: 40px;
   height: auto
 }
 
 .profile-body h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
 }
 
 .form-container {
-  background-color: #1f1f1f;
+  background: transparent;
   padding: 1rem;
   margin-bottom: 1rem;
-  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -795,46 +918,27 @@ canvas#pieChart {
 .form-container form input {
   padding: 0.6rem;
   margin-bottom: 1rem;
-  background-color: #2c2c2c;
+  background: transparent;
   color: #fff;
-  border: none;
+  border: solid 1px #fff;
   border-radius: 6px;
 }
 
-
-
-/*
-.collapsible-form {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-  background-color: #1f1f1f;
+.form-container form button {
+  font-size: 15px;
+  height: 34px;
+  background-color: #ffef0c;
   border-radius: 10px;
-  padding: 0 1rem; 
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.collapsible-form.open {
-  padding: 1rem; 
-}
-
-.collapsible-form form {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-}
-
-.collapsible-form input {
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  background-color: #2c2c2c;
-  color: #fff;
   border: none;
-  border-radius: 6px;
+  transition: 0.3s ease;
 }
-*/
+
+.form-container form button:hover{
+  background-color: #fff344;
+  transform: scale(1.03);
+}
+
+
 
 
 
