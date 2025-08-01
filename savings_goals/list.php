@@ -6,7 +6,7 @@ require_login();
 
 $query = "SELECT * FROM savings_goals WHERE user_id = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $__SESSION['user_id']);
+$stmt->bind_param("i", $_SESSION['user_id']);
 
 if (!$stmt->execute())
 {
@@ -101,16 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
         <?php endwhile; ?>
         </tbody>
-
-        <tfoot>
-        <?php if ($count > 0): ?>
-            <tr>
-                <td colspan="2"></td>
-                <td>Total Count: <?= $count; ?></td>
-                <td colspan="2">Total Saved: ₱<?= number_format($totalAmount, 2); ?></td>
-            </tr>
-        <?php endif; ?>
-        </tfoot>
     </table>
 
     <!-- Edit Modal -->

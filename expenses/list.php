@@ -6,7 +6,7 @@ require_login();
 
 $query = "SELECT * FROM expenses WHERE user_id = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $__SESSION['user_id']);
+$stmt->bind_param("i", $_SESSION['user_id']);
 
 if (!$stmt->execute())
 {
@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <th>Category</th>
                 <th>Description</th>
                 <th>Date</th>
+                <th>Amount</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -74,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <tr>
                 <td><?= $row['category']; ?></td>
                 <td><?= $row['description']; ?></td>
-                <td>₱<?= number_format($amount, 2); ?></td>
                 <td><?= $row['date']; ?></td>
+                <td>₱<?= number_format($amount, 2); ?></td>
                 <td>
                     <form method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">

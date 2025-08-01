@@ -1,12 +1,23 @@
 <?php
-session_start();
 include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-$query = "SELECT * FROM income";
-$data = $conn->query($query);
 
+$query = "SELECT * FROM income WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $_SESSION['user_id']);
+
+if (!$stmt->execute())
+{
+    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    header("Location: ../index.php");
+    exit();
+}
+
+$data = $stmt->get_result();
+
+$totalAmount = 0;
 $count = 0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
@@ -56,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 <thead>
                     <tr>
                         <th>Source</th>
-                        <th>Amount</th>
                         <th>Date</th>
+                        <th>Amount</th>
                         <th>Action</th> 
                     </tr>
                 </thead>
@@ -71,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 ?>
                     <tr>
                         <td><?= $row['source']; ?></td>
-                        <td>₱<?= number_format($amount, 2);?></td>
                         <td><?= $row['date']; ?></td>
+                        <td>₱<?= number_format($amount, 2);?></td>
                         <td>
                             <form method="POST" style="display:inline;">
                                     <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -101,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     <?php if($count > 0):?>
                     <tr>
                         <td colspan="2"></td> <!-- Empty 2 columns-->
-                        <td>Total Count: <?= $count; ?></td>
-                        <td>Total Amount: ₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                        <td>₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                        <td>Count: <?= $count; ?></td>
                     </tr>
                     <?php endif; ?>
                 </tfoot>
