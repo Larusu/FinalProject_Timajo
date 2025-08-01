@@ -96,28 +96,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     </table>
     <br><br>
 
-    <!-- Toggle Button -->
-    <button class="toggle-form-btn" onclick="toggleForm()">
-    <i class="fas fa-chevron-down"></i> Add New Entry
-    </button>
-
-    <!-- Collapsible Form -->
-    <div id="collapsibleForm" class="collapsible-form">
-    <form method="POST" action="add.php">
-        <label for="source">Income Source:</label><br>
-        <input id="source" name="source" placeholder="e.g. Salary, Freelance" required><br><br>
-
-        <label for="amount">Amount:</label><br>
-        <input id="amount" name="amount" placeholder="e.g. 1500.00" type="number" step="0.01" required><br><br>
-
-        <label for="date">Date:</label><br>
-        <input id="date" type="date" name="date" required><br><br>
-
-        <button type="submit">Add Entry</button>
-    </form>
-    </div>
-
     <script src="../assets/js/script.js"></script>
-
-    <!-- gawa ng design dito para mapunta sa list tab -->
 </html>
