@@ -9,7 +9,7 @@ $stmt->bind_param("i", $_SESSION['user_id']);
 
 if (!$stmt->execute())
 {
-    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    $_SESSION['messages'][] = "Failed to retrieve data.";
     header("Location: ../index.php");
     exit();
 }
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if (isset($_POST['delete'])) 
     {
         $stmt = $conn->prepare("DELETE FROM income WHERE id = ?");
-        $stmt->bind_param("i", $id); // i for integer
+        $stmt->bind_param("i", $id); 
         if ($stmt->execute()) 
         {
             $_SESSION['messages'][] = "Deleted successfully!";
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     <?php if($count > 0):?>
                     <tr>
                         <td colspan="2"></td> <!-- Empty 2 columns-->
-                        <td>₱<?= number_format($totalAmount, 2); ?></td> <!-- try mo to na naka strong <strong>Total Amount: <?= $totalAmount ?></strong> -->
+                        <td>₱<?= number_format($totalAmount, 2); ?></td> 
                         <td>Count: <?= $count; ?></td>
                     </tr>
                     <?php endif; ?>
@@ -133,10 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             </form>
         </div>
         </div>
-
-
-
-
 
 
         <div class="add-income-container">

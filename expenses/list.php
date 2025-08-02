@@ -10,7 +10,7 @@ $stmt->bind_param("i", $_SESSION['user_id']);
 
 if (!$stmt->execute())
 {
-    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    $_SESSION['messages'][] = "Failed to retrieve data.";
     header("Location: ../index.php");
     exit();
 }
@@ -19,17 +19,21 @@ $data = $stmt->get_result();
 $totalAmount = 0;
 $count = 0;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $id = intval($_POST['id']);
 
-    if (isset($_POST['delete'])) {
+    if (isset($_POST['delete'])) 
+    {
         $stmt = $conn->prepare("DELETE FROM expenses WHERE id = ?");
         $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
+        if ($stmt->execute()) 
+        {
             $_SESSION['messages'][] = "Deleted successfully!";
             header("Location: expenses.php");
             exit();
-        } else {
+        } else 
+        {
             $_SESSION['messages'][] = "Delete failed!";
         }
     }
@@ -98,9 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <tfoot>
             <?php if ($count > 0): ?>
             <tr>
-                <td colspan="2"></td>
-                <td>Total Count: <?= $count; ?></td>
-                <td>Total Amount: ₱<?= number_format($totalAmount, 2); ?></td>
+                <td colspan="3"></td>
+                <td>₱<?= number_format($totalAmount, 2); ?></td>
+                <td>Count: <?= $count; ?></td>
             </tr>
             <?php endif; ?>
         </tfoot>

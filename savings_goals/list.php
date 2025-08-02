@@ -10,7 +10,7 @@ $stmt->bind_param("i", $_SESSION['user_id']);
 
 if (!$stmt->execute())
 {
-    $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    $_SESSION['messages'][] = "Failed to retrieve data.";
     header("Location: ../index.php");
     exit();
 }
