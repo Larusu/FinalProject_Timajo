@@ -3,7 +3,6 @@ require_once '../helpers/auth.php';
 require_login();
 include_once '../config/database.php';
 
-// Fetch monthly income and expenses
 $monthlyQuery = $conn->prepare("
   SELECT 
     DATE_FORMAT(date, '%Y-%m') AS month,
@@ -29,21 +28,18 @@ while ($row = $monthlyResult->fetch_assoc()) {
     $expenses[] = (float) $row['expense'];
 }
 
-// Get total income
 $incomeQuery = $conn->prepare("SELECT SUM(amount) AS total_income FROM income WHERE user_id = ?");
 $incomeQuery->bind_param("i", $_SESSION['user_id']);
 $incomeQuery->execute();
 $incomeResult = $incomeQuery->get_result()->fetch_assoc();
 $totalIncome = $incomeResult['total_income'] ?? 0;
 
-// Get total expenses
 $expenseQuery = $conn->prepare("SELECT SUM(amount) AS total_expenses FROM expenses WHERE user_id = ?");
 $expenseQuery->bind_param("i", $_SESSION['user_id']);
 $expenseQuery->execute();
 $expenseResult = $expenseQuery->get_result()->fetch_assoc();
 $totalExpenses = $expenseResult['total_expenses'] ?? 0;
 
-// Get top 3 savings goals by progress
 $goalsQuery = $conn->prepare("
   SELECT goal_name, saved_amount, target_amount
   FROM savings_goals
@@ -65,7 +61,6 @@ while ($row = $goalsResult->fetch_assoc()) {
     ];
 }
 
-// Get total savings progress
 $savingsQuery = $conn->prepare("SELECT SUM(saved_amount) AS total_saved, SUM(target_amount) AS total_target FROM savings_goals WHERE user_id = ?");
 $savingsQuery->bind_param("i", $_SESSION['user_id']);
 $savingsQuery->execute();
@@ -74,7 +69,6 @@ $totalSaved = $savingsResult['total_saved'] ?? 0;
 $totalTarget = $savingsResult['total_target'] ?? 0;
 $savingsProgress = ($totalTarget > 0) ? ($totalSaved / $totalTarget * 100) : 0;
 
-// Net Balance
 $netBalance = $totalIncome - $totalExpenses;
 ?>
 <!DOCTYPE html>
