@@ -3,11 +3,19 @@ include_once '../config/database.php';
 require_once '../helpers/auth.php';
 require_login();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $category = trim($_POST['category']);
     $description = trim($_POST['description']);
     $amount = floatval($_POST['amount']);
     $date = trim($_POST['date']);
+
+    if($amount <= 0)
+    {
+        $_SESSION['messages'][] = 'Amount must be greater than zero.';
+        header("Location: list.php");
+        exit();
+    }
 
     $query = "INSERT INTO expenses (user_id, category, description, amount, date)
               VALUES (?, ?, ?, ?, ?)";
@@ -15,13 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($query);
     $stmt->bind_param("issds", $_SESSION['user_id'], $category, $description, $amount, $date);
 
-    if ($stmt->execute()) {
-        $_SESSION['messages'][] = 'Expense added successfully!';
-    } else {
-        $_SESSION['messages'][] = "Database error: " . $stmt->error;
+    if($stmt->execute())
+    {
+        $_SESSION['messages'][] = 'Added to income!';
+    }
+    else
+    {
+        $_SESSION['messages'][] = 'Adding goal Failed: ' . $stmt->error;
     }
 
-    // Redirect back to the expenses page
     header("Location: list.php");
     exit();
 }
